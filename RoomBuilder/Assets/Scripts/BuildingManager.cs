@@ -11,6 +11,9 @@ public class BuildingManager : MonoBehaviour
     private RaycastHit hit;
     [SerializeField] private LayerMask layer;
     public float rotateAmount;
+    public bool canPlace = true;
+    [Header("Visualization")]
+    [SerializeField] private Material[] materials;
 
     [Header("Snap settings")]
     public float gridSize;
@@ -33,7 +36,9 @@ public class BuildingManager : MonoBehaviour
                 selectedObject.transform.position = placementPos;
             }
 
-            if (Input.GetMouseButtonDown(0))
+            UpdateMaterials();
+
+            if (Input.GetMouseButtonDown(0) && canPlace)
             {
                 PlaceObject();
             }
@@ -63,6 +68,7 @@ public class BuildingManager : MonoBehaviour
 
     public void PlaceObject()
     {
+        selectedObject.GetComponent<MeshRenderer>().material = materials[2];
         selectedObject = null;
     }
 
@@ -91,5 +97,17 @@ public class BuildingManager : MonoBehaviour
         }
 
         return position;
+    }
+
+    void UpdateMaterials()
+    {
+        if (canPlace)
+        {
+            selectedObject.GetComponent<MeshRenderer>().material = materials[0];
+        }
+        else
+        {
+            selectedObject.GetComponent<MeshRenderer>().material = materials[1];
+        }
     }
 }
