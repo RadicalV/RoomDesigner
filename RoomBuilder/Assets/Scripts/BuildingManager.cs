@@ -1,23 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class BuildingManager : MonoBehaviour
 {
+    [Header("Placement options")]
     public GameObject[] objects;
     private GameObject selectedObject;
+    private float selectedObjectHeight;
     private Vector3 placementPos;
     private RaycastHit hit;
+    [SerializeField] private LayerMask layer;
+    public float rotateAmount;
 
-    [SerializeField]
-    private LayerMask layer;
-
+    [Header("Snap settings")]
     public float gridSize;
-    bool gridOn = false;
-
-    [SerializeField]
-    private Toggle gridToggle;
+    bool isSnapOn = false;
+    [SerializeField] private Toggle snapToggle;
 
 
     // Update is called once per frame
@@ -25,7 +23,8 @@ public class BuildingManager : MonoBehaviour
     {
         if (selectedObject)
         {
-            if (gridOn)
+            // Moving the object
+            if (isSnapOn)
             {
                 selectedObject.transform.position = new Vector3(RoundToNearestGrid(placementPos.x), RoundToNearestGrid(placementPos.y), RoundToNearestGrid(placementPos.z));
             }
@@ -38,6 +37,8 @@ public class BuildingManager : MonoBehaviour
             {
                 PlaceObject();
             }
+
+            if (Input.GetKeyDown(KeyCode.R)) { RotateObject(); }
         }
     }
 
@@ -47,13 +48,17 @@ public class BuildingManager : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, 1000, layer))
         {
-            placementPos = hit.point;
+            if (selectedObject)
+            {
+                placementPos = new Vector3(hit.point.x, hit.point.y + selectedObjectHeight / 2, hit.point.z);
+            }
         }
     }
 
     public void SelectObject(int index)
     {
         selectedObject = Instantiate(objects[index], placementPos, transform.rotation);
+        selectedObjectHeight = selectedObject.GetComponent<MeshRenderer>().bounds.size.y;
     }
 
     public void PlaceObject()
@@ -61,13 +66,18 @@ public class BuildingManager : MonoBehaviour
         selectedObject = null;
     }
 
+    public void RotateObject()
+    {
+        selectedObject.transform.Rotate(Vector3.up, rotateAmount);
+    }
+
     public void ToggleGrid()
     {
-        if (gridToggle.isOn)
+        if (snapToggle.isOn)
         {
-            gridOn = true;
+            isSnapOn = true;
         }
-        else { gridOn = false; }
+        else { isSnapOn = false; }
     }
 
     float RoundToNearestGrid(float position)

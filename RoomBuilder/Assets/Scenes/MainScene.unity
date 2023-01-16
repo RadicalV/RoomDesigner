@@ -212,7 +212,7 @@ GameObject:
   - component: {fileID: 116621788}
   - component: {fileID: 116621787}
   m_Layer: 3
-  m_Name: Plane
+  m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -333,8 +333,9 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 8
+  rotateAmount: 45
   gridSize: 0.25
-  gridToggle: {fileID: 1016042147}
+  snapToggle: {fileID: 1016042147}
 --- !u!4 &489217952
 Transform:
   m_ObjectHideFlags: 0
@@ -658,7 +659,7 @@ GameObject:
   - component: {fileID: 809820774}
   - component: {fileID: 809820773}
   m_Layer: 0
-  m_Name: Cube (1)
+  m_Name: Wall (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -889,7 +890,7 @@ GameObject:
   m_Component:
   - component: {fileID: 942165508}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: GameArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1008,7 +1009,7 @@ GameObject:
   - component: {fileID: 1016042146}
   - component: {fileID: 1016042147}
   m_Layer: 5
-  m_Name: GridToggle
+  m_Name: SnapToggle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1378,7 +1379,7 @@ GameObject:
   - component: {fileID: 1172650898}
   - component: {fileID: 1172650897}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
