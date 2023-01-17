@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class BuildingManager : MonoBehaviour
 {
+    private MeshRenderer selectedObjectMeshRenderer;
     [Header("Placement options")]
     public GameObject[] objects;
     private GameObject selectedObject;
@@ -13,8 +14,11 @@ public class BuildingManager : MonoBehaviour
     [SerializeField] private LayerMask layer;
     public float rotateAmount;
     public bool canPlace = true;
+
     [Header("Visualization")]
     [SerializeField] private Material[] materials;
+    public Image colorPreview;
+    private Color selectedObjectColor;
 
     [Header("Snap settings")]
     public float gridSize;
@@ -68,7 +72,11 @@ public class BuildingManager : MonoBehaviour
         if (selectedObject) DeselectObject();
 
         selectedObject = Instantiate(objects[index], placementPos, transform.rotation);
-        selectedObjectHeight = selectedObject.GetComponent<MeshRenderer>().bounds.size.y;
+        selectedObject.name = objects[index].name;
+
+        selectedObjectMeshRenderer = selectedObject.GetComponent<MeshRenderer>();
+        selectedObjectHeight = selectedObjectMeshRenderer.bounds.size.y;
+        selectedObjectColor = materials[2].color;
     }
 
     public void DeselectObject()
@@ -80,14 +88,19 @@ public class BuildingManager : MonoBehaviour
 
     public void SetSelectedObject(GameObject obj)
     {
+        // set selected object and mesh renderer to newly selected object
         selectedObject = obj;
-        selectedObjectHeight = selectedObject.GetComponent<MeshRenderer>().bounds.size.y;
+        selectedObjectMeshRenderer = obj.GetComponent<MeshRenderer>();
+
+        selectedObjectHeight = selectedObjectMeshRenderer.bounds.size.y;
+        selectedObjectColor = selectedObjectMeshRenderer.material.color;
         placementPos = obj.transform.position;
     }
 
     public void PlaceObject()
     {
-        selectedObject.GetComponent<MeshRenderer>().material = materials[2];
+        selectedObjectMeshRenderer.material.color = selectedObjectColor;
+        colorPreview.color = selectedObjectColor;
         selectedObject = null;
     }
 
@@ -122,11 +135,11 @@ public class BuildingManager : MonoBehaviour
     {
         if (canPlace)
         {
-            selectedObject.GetComponent<MeshRenderer>().material = materials[0];
+            selectedObjectMeshRenderer.material = materials[0];
         }
         else
         {
-            selectedObject.GetComponent<MeshRenderer>().material = materials[1];
+            selectedObjectMeshRenderer.material = materials[1];
         }
     }
 }

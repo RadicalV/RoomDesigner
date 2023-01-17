@@ -1,16 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class SelectManager : MonoBehaviour
 {
-
-    public GameObject selectedObject;
-    public TextMeshProUGUI objNameText;
+    private GameObject selectedObject;
     private BuildingManager buildingManager;
+    private MeshRenderer objectMeshRenderer;
+
+    [Header("UI")]
     public GameObject objectUI;
+    public Image colorPreview;
+    public TextMeshProUGUI objNameText;
 
     void Start()
     {
@@ -43,6 +45,9 @@ public class SelectManager : MonoBehaviour
 
     private void Select(GameObject gameObject)
     {
+        //set the object MeshRenderer variable
+        objectMeshRenderer = gameObject.GetComponent<MeshRenderer>();
+
         // if object is already selected return
         if (selectedObject == gameObject) return;
 
@@ -52,13 +57,16 @@ public class SelectManager : MonoBehaviour
         //Get outline
         Outline outline = gameObject.GetComponent<Outline>();
 
-        //If object doesn't have an aoutline add one
+        //If object doesn't have an aoutline add one and set active
         if (outline == null) gameObject.AddComponent<Outline>();
         else outline.enabled = true;
 
-        objNameText.text = gameObject.name;
+        // set UI to active, set display text and set the selected object
+        objNameText.text = "Selected: " + gameObject.name;
+
         objectUI.SetActive(true);
         selectedObject = gameObject;
+        colorPreview.color = objectMeshRenderer.material.color;
     }
 
     private void Deselect()
@@ -78,5 +86,10 @@ public class SelectManager : MonoBehaviour
         GameObject objToDestroy = selectedObject;
         Deselect();
         Destroy(objToDestroy);
+    }
+
+    public void ChangeColor(Color color)
+    {
+        objectMeshRenderer.material.color = color;
     }
 }
