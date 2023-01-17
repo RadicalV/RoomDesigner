@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class BuildingManager : MonoBehaviour
@@ -38,6 +39,8 @@ public class BuildingManager : MonoBehaviour
 
             UpdateMaterials();
 
+            if (EventSystem.current.IsPointerOverGameObject()) return;
+
             if (Input.GetMouseButtonDown(0) && canPlace)
             {
                 PlaceObject();
@@ -62,8 +65,24 @@ public class BuildingManager : MonoBehaviour
 
     public void SelectObject(int index)
     {
+        if (selectedObject) DeselectObject();
+
         selectedObject = Instantiate(objects[index], placementPos, transform.rotation);
         selectedObjectHeight = selectedObject.GetComponent<MeshRenderer>().bounds.size.y;
+    }
+
+    public void DeselectObject()
+    {
+        GameObject objToDestroy = selectedObject;
+        Destroy(objToDestroy);
+        selectedObject = null;
+    }
+
+    public void SetSelectedObject(GameObject obj)
+    {
+        selectedObject = obj;
+        selectedObjectHeight = selectedObject.GetComponent<MeshRenderer>().bounds.size.y;
+        placementPos = obj.transform.position;
     }
 
     public void PlaceObject()
