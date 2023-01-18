@@ -22,28 +22,30 @@ public class BuildingManager : MonoBehaviour
 
     [Header("Snap settings")]
     public float gridSize;
-    bool isSnapOn = false;
-    [SerializeField] private Toggle snapToggle;
-
+    bool isGridSnapOn = false;
+    [SerializeField] private Toggle gridSnapToggle;
+    public bool isObjectSnapOn = false;
+    [SerializeField] protected Toggle objectSnapToggle;
 
     // Update is called once per frame
     void Update()
     {
         if (selectedObject)
         {
+            if (EventSystem.current.IsPointerOverGameObject()) return;
+
             // Moving the object
-            if (isSnapOn)
+            if (isGridSnapOn)
             {
                 selectedObject.transform.position = new Vector3(RoundToNearestGrid(placementPos.x), RoundToNearestGrid(placementPos.y), RoundToNearestGrid(placementPos.z));
             }
             else
             {
-                selectedObject.transform.position = placementPos;
+                if (!selectedObject.GetComponent<CheckPlacement>().isSnapped)
+                    selectedObject.transform.position = placementPos;
             }
 
             UpdateMaterials();
-
-            if (EventSystem.current.IsPointerOverGameObject()) return;
 
             if (Input.GetMouseButtonDown(0) && canPlace)
             {
@@ -56,11 +58,11 @@ public class BuildingManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        if (Physics.Raycast(ray, out hit, 1000, layer))
+        if (selectedObject)
         {
-            if (selectedObject)
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out hit, 1000, layer))
             {
                 placementPos = new Vector3(hit.point.x, hit.point.y + selectedObjectHeight / 2, hit.point.z);
             }
@@ -101,6 +103,7 @@ public class BuildingManager : MonoBehaviour
     {
         selectedObjectMeshRenderer.material.color = selectedObjectColor;
         colorPreview.color = selectedObjectColor;
+        selectedObject.GetComponent<CheckPlacement>().isPlaced = true;
         selectedObject = null;
     }
 
@@ -111,11 +114,20 @@ public class BuildingManager : MonoBehaviour
 
     public void ToggleGrid()
     {
-        if (snapToggle.isOn)
+        if (gridSnapToggle.isOn)
         {
-            isSnapOn = true;
+            isGridSnapOn = true;
         }
-        else { isSnapOn = false; }
+        else { isGridSnapOn = false; }
+    }
+
+    public void ToggleObjectSnap()
+    {
+        if (objectSnapToggle.isOn)
+        {
+            isObjectSnapOn = true;
+        }
+        else { isObjectSnapOn = false; }
     }
 
     float RoundToNearestGrid(float position)

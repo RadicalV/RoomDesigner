@@ -31,9 +31,9 @@ public class SelectManager : MonoBehaviour
             {
                 if (EventSystem.current.IsPointerOverGameObject()) return;
 
-                if (hit.collider.tag == "Object")
+                if (hit.transform.tag == "Object")
                 {
-                    Select(hit.collider.gameObject);
+                    Select(hit.transform.gameObject);
                 }
                 else if (selectedObject) Deselect();
             }
@@ -45,28 +45,33 @@ public class SelectManager : MonoBehaviour
 
     private void Select(GameObject gameObject)
     {
-        //set the object MeshRenderer variable
-        objectMeshRenderer = gameObject.GetComponent<MeshRenderer>();
+        if (gameObject.GetComponent<CheckPlacement>().isPlaced)
+        {
 
-        // if object is already selected return
-        if (selectedObject == gameObject) return;
 
-        // if different object is already selected deselect it
-        if (selectedObject != null) Deselect();
+            //set the object MeshRenderer variable
+            objectMeshRenderer = gameObject.GetComponent<MeshRenderer>();
 
-        //Get outline
-        Outline outline = gameObject.GetComponent<Outline>();
+            // if object is already selected return
+            if (selectedObject == gameObject) return;
 
-        //If object doesn't have an aoutline add one and set active
-        if (outline == null) gameObject.AddComponent<Outline>();
-        else outline.enabled = true;
+            // if different object is already selected deselect it
+            if (selectedObject != null) Deselect();
 
-        // set UI to active, set display text and set the selected object
-        objNameText.text = "Selected: " + gameObject.name;
+            //Get outline
+            Outline outline = gameObject.GetComponent<Outline>();
 
-        objectUI.SetActive(true);
-        selectedObject = gameObject;
-        colorPreview.color = objectMeshRenderer.material.color;
+            //If object doesn't have an aoutline add one and set active
+            if (outline == null) gameObject.AddComponent<Outline>();
+            else outline.enabled = true;
+
+            // set UI to active, set display text and set the selected object
+            objNameText.text = "Selected: " + gameObject.name;
+
+            objectUI.SetActive(true);
+            selectedObject = gameObject;
+            colorPreview.color = objectMeshRenderer.material.color;
+        }
     }
 
     private void Deselect()
@@ -78,6 +83,7 @@ public class SelectManager : MonoBehaviour
 
     public void Move()
     {
+        selectedObject.GetComponent<CheckPlacement>().isPlaced = false;
         buildingManager.SetSelectedObject(selectedObject);
     }
 

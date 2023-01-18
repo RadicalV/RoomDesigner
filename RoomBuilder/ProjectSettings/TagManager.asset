@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Wall
   - Object
+  - EastCollider
+  - WestCollider
+  - NorthCollider
+  - SouthCollider
   layers:
   - Default
   - TransparentFX
