@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using System.Text.RegularExpressions;
 
 public class SelectManager : MonoBehaviour
 {
@@ -66,8 +67,8 @@ public class SelectManager : MonoBehaviour
             else outline.enabled = true;
 
             // set UI to active, set display text and set the selected object
-            objNameText.text = "Selected: " + gameObject.name;
-
+            Debug.Log(Regex.Split(gameObject.name, "\\d")[0]);
+            objNameText.text = "Selected: " + Regex.Split(gameObject.name, "\\d")[0];
             objectUI.SetActive(true);
             selectedObject = gameObject;
             colorPreview.color = objectMeshRenderer.material.color;
