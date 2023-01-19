@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<ItemDB xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <items>
+    <Item>
+      <PrefabID>Cube</PrefabID>
+      <ItemID>Cube0DataManager (DataManager)</ItemID>
+      <Position>
+        <x>-3.62669086</x>
+        <y>0.5</y>
+        <z>-0.162372708</z>
+      </Position>
+      <Rotation>
+        <x>-0</x>
+        <y>0.382683426</y>
+        <z>-0</z>
+        <w>0.923879564</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>44.9999962</y>
+          <z>-0</z>
+        </eulerAngles>
+      </Rotation>
+      <Color>RGBA(0.161, 0.812, 0.141, 1.000)</Color>
+    </Item>
+    <Item>
+      <PrefabID>Cylinder</PrefabID>
+      <ItemID>Cylinder1DataManager (DataManager)</ItemID>
+      <Position>
+        <x>-2.38910532</x>
+        <y>1</y>
+        <z>2.66053915</z>
+      </Position>
+      <Rotation>
+        <x>-0</x>
+        <y>0.382683426</y>
+        <z>-0</z>
+        <w>0.923879564</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>44.9999962</y>
+          <z>-0</z>
+        </eulerAngles>
+      </Rotation>
+      <Color>RGBA(0.647, 0.020, 0.667, 1.000)</Color>
+    </Item>
+    <Item>
+      <PrefabID>Sphere</PrefabID>
+      <ItemID>Sphere2DataManager (DataManager)</ItemID>
+      <Position>
+        <x>-3.04150152</x>
+        <y>0.5</y>
+        <z>1.89163542</z>
+      </Position>
+      <Rotation>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+        <w>1</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>0</y>
+          <z>0</z>
+        </eulerAngles>
+      </Rotation>
+      <Color>RGBA(0.118, 0.071, 0.808, 1.000)</Color>
+    </Item>
+    <Item>
+      <PrefabID>Sphere</PrefabID>
+      <ItemID>Sphere3DataManager (DataManager)</ItemID>
+      <Position>
+        <x>-1.49292588</x>
+        <y>0.5</y>
+        <z>3.15096617</z>
+      </Position>
+      <Rotation>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+        <w>1</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>0</y>
+          <z>0</z>
+        </eulerAngles>
+      </Rotation>
+      <Color>RGBA(0.118, 0.071, 0.808, 1.000)</Color>
+    </Item>
+  </items>
+</ItemDB>

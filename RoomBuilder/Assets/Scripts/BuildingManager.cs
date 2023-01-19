@@ -14,6 +14,7 @@ public class BuildingManager : MonoBehaviour
     [SerializeField] private LayerMask layer;
     public float rotateAmount;
     public bool canPlace = true;
+    public bool isBuilding;
 
     [Header("Visualization")]
     [SerializeField] private Material[] materials;
@@ -79,10 +80,12 @@ public class BuildingManager : MonoBehaviour
         selectedObjectMeshRenderer = selectedObject.GetComponent<MeshRenderer>();
         selectedObjectHeight = selectedObjectMeshRenderer.bounds.size.y;
         selectedObjectColor = materials[2].color;
+        isBuilding = true;
     }
 
     public void DeselectObject()
     {
+        isBuilding = false;
         GameObject objToDestroy = selectedObject;
         Destroy(objToDestroy);
         selectedObject = null;
@@ -97,13 +100,17 @@ public class BuildingManager : MonoBehaviour
         selectedObjectHeight = selectedObjectMeshRenderer.bounds.size.y;
         selectedObjectColor = selectedObjectMeshRenderer.material.color;
         placementPos = obj.transform.position;
+        isBuilding = true;
     }
 
     public void PlaceObject()
     {
+        isBuilding = false;
         selectedObjectMeshRenderer.material.color = selectedObjectColor;
         colorPreview.color = selectedObjectColor;
         selectedObject.GetComponent<CheckPlacement>().isPlaced = true;
+        DataManager.Instance.AddItem(selectedObject, selectedObject.name);
+
         selectedObject = null;
     }
 

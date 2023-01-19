@@ -31,16 +31,69 @@ public class ObjectCollider : MonoBehaviour
                 switch (this.transform.tag)
                 {
                     case "EastCollider":
-                        other.transform.position = new Vector3(transform.parent.parent.position.x + sizeX, other.transform.position.y, transform.parent.position.z);
+                        if (Mathf.Abs(Quaternion.Dot(transform.parent.parent.transform.rotation, Quaternion.Euler(0, 90, 0))) > 0.9999f)
+                        {
+                            other.transform.position = new Vector3(transform.parent.parent.position.x, other.transform.position.y, transform.parent.position.z - sizeZ);
+                        }
+                        else if (Mathf.Abs(Quaternion.Dot(transform.parent.parent.transform.rotation, Quaternion.Euler(0, 180, 0))) > 0.9999f)
+                        {
+                            other.transform.position = new Vector3(transform.parent.parent.position.x - sizeX, other.transform.position.y, transform.parent.position.z);
+                        }
+                        else if (Mathf.Abs(Quaternion.Dot(transform.parent.parent.transform.rotation, Quaternion.Euler(0, 270, 0))) > 0.9999f)
+                        {
+                            other.transform.position = new Vector3(transform.parent.parent.position.x, other.transform.position.y, transform.parent.position.z + sizeZ);
+                        }
+                        else
+                            other.transform.position = new Vector3(transform.parent.parent.position.x + sizeX, other.transform.position.y, transform.parent.position.z);
                         break;
                     case "WestCollider":
-                        other.transform.position = new Vector3(transform.parent.parent.position.x - sizeX, other.transform.position.y, transform.parent.position.z);
+                        if (Mathf.Abs(Quaternion.Dot(transform.parent.parent.transform.rotation, Quaternion.Euler(0, 90, 0))) > 0.9999f)
+                        {
+                            other.transform.position = new Vector3(transform.parent.parent.position.x, other.transform.position.y, transform.parent.position.z + sizeZ);
+                        }
+                        else if (Mathf.Abs(Quaternion.Dot(transform.parent.parent.transform.rotation, Quaternion.Euler(0, 180, 0))) > 0.9999f)
+                        {
+                            other.transform.position = new Vector3(transform.parent.parent.position.x + sizeX, other.transform.position.y, transform.parent.position.z);
+                        }
+                        else if (Mathf.Abs(Quaternion.Dot(transform.parent.parent.transform.rotation, Quaternion.Euler(0, 270, 0))) > 0.9999f)
+                        {
+                            other.transform.position = new Vector3(transform.parent.parent.position.x, other.transform.position.y, transform.parent.position.z - sizeZ);
+                        }
+                        else
+                            other.transform.position = new Vector3(transform.parent.parent.position.x - sizeX, other.transform.position.y, transform.parent.position.z);
                         break;
                     case "NorthCollider":
-                        other.transform.position = new Vector3(transform.parent.parent.position.x, other.transform.position.y, transform.parent.position.z + sizeZ);
+                        if (Mathf.Abs(Quaternion.Dot(transform.parent.parent.transform.rotation, Quaternion.Euler(0, 90, 0))) > 0.9999f)
+                        {
+                            other.transform.position = new Vector3(transform.parent.parent.position.x + sizeX, other.transform.position.y, transform.parent.position.z);
+                        }
+                        else if (Mathf.Abs(Quaternion.Dot(transform.parent.parent.transform.rotation, Quaternion.Euler(0, 180, 0))) > 0.9999f)
+                        {
+                            other.transform.position = new Vector3(transform.parent.parent.position.x, other.transform.position.y, transform.parent.position.z - sizeZ);
+                        }
+                        else if (Mathf.Abs(Quaternion.Dot(transform.parent.parent.transform.rotation, Quaternion.Euler(0, 270, 0))) > 0.9999f)
+                        {
+                            other.transform.position = new Vector3(transform.parent.parent.position.x - sizeX, other.transform.position.y, transform.parent.position.z);
+                        }
+                        else
+                            other.transform.position = new Vector3(transform.parent.parent.position.x, other.transform.position.y, transform.parent.position.z + sizeZ);
                         break;
                     case "SouthCollider":
-                        other.transform.position = new Vector3(transform.parent.parent.position.x, other.transform.position.y, transform.parent.position.z - sizeZ);
+                        if (Mathf.Abs(Quaternion.Dot(transform.parent.parent.transform.rotation, Quaternion.Euler(0, 90, 0))) > 0.9999f)
+                        {
+                            other.transform.position = new Vector3(transform.parent.parent.position.x - sizeX, other.transform.position.y, transform.parent.position.z);
+                        }
+                        else if (Mathf.Abs(Quaternion.Dot(transform.parent.parent.transform.rotation, Quaternion.Euler(0, 180, 0))) > 0.9999f)
+                        {
+                            other.transform.position = new Vector3(transform.parent.parent.position.x, other.transform.position.y, transform.parent.position.z + sizeZ);
+                        }
+                        else if (Mathf.Abs(Quaternion.Dot(transform.parent.parent.transform.rotation, Quaternion.Euler(0, 270, 0))) > 0.9999f)
+                        {
+                            other.transform.position = new Vector3(transform.parent.parent.position.x + sizeX, other.transform.position.y, transform.parent.position.z);
+                        }
+                        else
+                            other.transform.position = new Vector3(transform.parent.parent.position.x, other.transform.position.y, transform.parent.position.z - sizeZ);
+
                         break;
                 }
             }

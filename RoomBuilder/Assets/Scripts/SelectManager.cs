@@ -39,16 +39,16 @@ public class SelectManager : MonoBehaviour
             }
         }
 
+        if (selectedObject && buildingManager.isBuilding) Deselect();
+
         // Deselect object by pressing right mouse button
         if (Input.GetMouseButtonDown(1) && selectedObject) Deselect();
     }
 
     private void Select(GameObject gameObject)
     {
-        if (gameObject.GetComponent<CheckPlacement>().isPlaced)
+        if (gameObject.GetComponent<CheckPlacement>().isPlaced && !buildingManager.isBuilding)
         {
-
-
             //set the object MeshRenderer variable
             objectMeshRenderer = gameObject.GetComponent<MeshRenderer>();
 
@@ -90,6 +90,7 @@ public class SelectManager : MonoBehaviour
     public void Delete()
     {
         GameObject objToDestroy = selectedObject;
+        DataManager.Instance.RemoveItem(objToDestroy.name);
         Deselect();
         Destroy(objToDestroy);
     }
@@ -97,5 +98,6 @@ public class SelectManager : MonoBehaviour
     public void ChangeColor(Color color)
     {
         objectMeshRenderer.material.color = color;
+        DataManager.Instance.UpdateColor(selectedObject.name, color.ToString());
     }
 }
