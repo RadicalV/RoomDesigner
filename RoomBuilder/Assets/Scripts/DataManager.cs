@@ -5,6 +5,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using System.IO;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class DataManager : MonoBehaviour
 {
@@ -45,7 +46,7 @@ public class DataManager : MonoBehaviour
 
     public void RemoveItem(string itemId)
     {
-        foreach (Item item in itemDB.items)
+        foreach (Item item in itemDB.items.ToList())
         {
             if (item.ItemID == itemId)
             {

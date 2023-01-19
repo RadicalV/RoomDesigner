@@ -2,75 +2,12 @@
 <ItemDB xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <items>
     <Item>
-      <PrefabID>Cube</PrefabID>
-      <ItemID>Cube0DataManager (DataManager)</ItemID>
-      <Position>
-        <x>-3.62669086</x>
-        <y>0.5</y>
-        <z>-0.162372708</z>
-      </Position>
-      <Rotation>
-        <x>-0</x>
-        <y>0.382683426</y>
-        <z>-0</z>
-        <w>0.923879564</w>
-        <eulerAngles>
-          <x>-0</x>
-          <y>44.9999962</y>
-          <z>-0</z>
-        </eulerAngles>
-      </Rotation>
-      <Color>RGBA(0.161, 0.812, 0.141, 1.000)</Color>
-    </Item>
-    <Item>
-      <PrefabID>Cylinder</PrefabID>
-      <ItemID>Cylinder1DataManager (DataManager)</ItemID>
-      <Position>
-        <x>-2.38910532</x>
-        <y>1</y>
-        <z>2.66053915</z>
-      </Position>
-      <Rotation>
-        <x>-0</x>
-        <y>0.382683426</y>
-        <z>-0</z>
-        <w>0.923879564</w>
-        <eulerAngles>
-          <x>-0</x>
-          <y>44.9999962</y>
-          <z>-0</z>
-        </eulerAngles>
-      </Rotation>
-      <Color>RGBA(0.647, 0.020, 0.667, 1.000)</Color>
-    </Item>
-    <Item>
-      <PrefabID>Sphere</PrefabID>
-      <ItemID>Sphere2DataManager (DataManager)</ItemID>
-      <Position>
-        <x>-3.04150152</x>
-        <y>0.5</y>
-        <z>1.89163542</z>
-      </Position>
-      <Rotation>
-        <x>0</x>
-        <y>0</y>
-        <z>0</z>
-        <w>1</w>
-        <eulerAngles>
-          <x>-0</x>
-          <y>0</y>
-          <z>0</z>
-        </eulerAngles>
-      </Rotation>
-      <Color>RGBA(0.118, 0.071, 0.808, 1.000)</Color>
-    </Item>
-    <Item>
       <PrefabID>Sphere</PrefabID>
       <ItemID>Sphere3DataManager (DataManager)</ItemID>
       <Position>
-        <x>-1.49292588</x>
+        <x>-2.56092739</x>
         <y>0.5</y>
-        <z>3.15096617</z>
+        <z>0.6440014</z>
       </Position>
       <Rotation>
         <x>0</x>
@@ -83,7 +20,49 @@
           <z>0</z>
         </eulerAngles>
       </Rotation>
-      <Color>RGBA(0.118, 0.071, 0.808, 1.000)</Color>
+      <Color>RGBA(0.031, 0.667, 0.082, 1.000)</Color>
+    </Item>
+    <Item>
+      <PrefabID>Cube</PrefabID>
+      <ItemID>Cube1DataManager (DataManager)</ItemID>
+      <Position>
+        <x>-0.984576464</x>
+        <y>0.5</y>
+        <z>2.73347545</z>
+      </Position>
+      <Rotation>
+        <x>0</x>
+        <y>0.3826834</y>
+        <z>0</z>
+        <w>0.923879564</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>44.9999962</y>
+          <z>0</z>
+        </eulerAngles>
+      </Rotation>
+      <Color>RGBA(0.882, 0.333, 0.180, 1.000)</Color>
+    </Item>
+    <Item>
+      <PrefabID>Cylinder</PrefabID>
+      <ItemID>Cylinder2DataManager (DataManager)</ItemID>
+      <Position>
+        <x>-1.87279463</x>
+        <y>1</y>
+        <z>1.7820859</z>
+      </Position>
+      <Rotation>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+        <w>1</w>
+        <eulerAngles>
+          <x>-0</x>
+          <y>0</y>
+          <z>0</z>
+        </eulerAngles>
+      </Rotation>
+      <Color>RGBA(1.000, 1.000, 1.000, 1.000)</Color>
     </Item>
   </items>
 </ItemDB>

@@ -67,7 +67,6 @@ public class SelectManager : MonoBehaviour
             else outline.enabled = true;
 
             // set UI to active, set display text and set the selected object
-            Debug.Log(Regex.Split(gameObject.name, "\\d")[0]);
             objNameText.text = "Selected: " + Regex.Split(gameObject.name, "\\d")[0];
             objectUI.SetActive(true);
             selectedObject = gameObject;
@@ -91,7 +90,7 @@ public class SelectManager : MonoBehaviour
     public void Delete()
     {
         GameObject objToDestroy = selectedObject;
-        DataManager.Instance.RemoveItem(objToDestroy.name);
+        DataManager.Instance.RemoveItem(selectedObject.name);
         Deselect();
         Destroy(objToDestroy);
     }
