@@ -65,11 +65,11 @@ public class CheckPlacement : MonoBehaviour
             if (!currentColliders.Contains(Regex.Split(other.transform.name, "\\d")[0])) currentColliders.Add(Regex.Split(other.transform.name, "\\d")[0]);
         }
 
-        if (!isPlaced && buildingManager.isObjectSnapOn && other.tag == "Wall")
+        if (!isPlaced && isSnapped && other.tag == "Wall")
         {
             buildingManager.canPlace = false;
         }
-        if (currentColliders.Count > 1) buildingManager.canPlace = false;
+        if (!isPlaced && currentColliders.Count > 1) buildingManager.canPlace = false;
     }
 
     private void OnTriggerExit(Collider other)
