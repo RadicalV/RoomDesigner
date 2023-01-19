@@ -15,6 +15,7 @@ public class BuildingManager : MonoBehaviour
     public float rotateAmount;
     public bool canPlace = true;
     public bool isBuilding;
+    private bool isMoving;
 
     [Header("Visualization")]
     [SerializeField] private Material[] materials;
@@ -59,6 +60,7 @@ public class BuildingManager : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //Gets mouse position and sets object placement position to it
         if (selectedObject)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -70,8 +72,11 @@ public class BuildingManager : MonoBehaviour
         }
     }
 
+    // Sets selected object based on the UI button pressed
     public void SelectObject(int index)
     {
+        if (isMoving) return;
+
         if (selectedObject) DeselectObject();
 
         selectedObject = Instantiate(objects[index], placementPos, transform.rotation);
@@ -83,12 +88,16 @@ public class BuildingManager : MonoBehaviour
         isBuilding = true;
     }
 
+    // Destroys selected object if it's not placed
     public void DeselectObject()
     {
-        isBuilding = false;
-        GameObject objToDestroy = selectedObject;
-        Destroy(objToDestroy);
-        selectedObject = null;
+        if (!isMoving)
+        {
+            isBuilding = false;
+            GameObject objToDestroy = selectedObject;
+            Destroy(objToDestroy);
+            selectedObject = null;
+        }
     }
 
     public void SetSelectedObject(GameObject obj)
@@ -101,13 +110,18 @@ public class BuildingManager : MonoBehaviour
         selectedObjectColor = selectedObjectMeshRenderer.material.color;
         placementPos = obj.transform.position;
         isBuilding = true;
+        isMoving = true;
     }
 
+    //Places the selected object
     public void PlaceObject()
     {
         isBuilding = false;
+        isMoving = false;
+
         selectedObjectMeshRenderer.material.color = selectedObjectColor;
         colorPreview.color = selectedObjectColor;
+
         selectedObject.GetComponent<CheckPlacement>().isPlaced = true;
         DataManager.Instance.AddItem(selectedObject, selectedObject.name);
 

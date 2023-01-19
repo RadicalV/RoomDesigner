@@ -28,6 +28,7 @@ public class ObjectCollider : MonoBehaviour
                 float sizeX = sizeOfObject.x;
                 float sizeZ = sizeOfObject.z;
 
+                // Sets object position based on it's rotation and side of the object it is trying to snap to
                 switch (this.transform.tag)
                 {
                     case "EastCollider":
@@ -161,6 +162,7 @@ public class ObjectCollider : MonoBehaviour
                         break;
                 }
 
+                //Sets object rotation to the rotation of the object it is snapping to
                 other.transform.rotation = transform.parent.parent.transform.rotation;
             }
         }

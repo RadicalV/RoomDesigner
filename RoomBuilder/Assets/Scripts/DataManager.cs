@@ -68,8 +68,12 @@ public class DataManager : MonoBehaviour
 
     public void SaveData()
     {
+        if (!Directory.Exists(Application.persistentDataPath + "/Saves"))
+        {
+            Directory.CreateDirectory(Application.persistentDataPath + "/Saves");
+        }
         XmlSerializer xmlSerializer = new XmlSerializer(typeof(ItemDB));
-        FileStream stream = new FileStream(Application.dataPath + "/Saves/Game_Data.xml", FileMode.Create);
+        FileStream stream = new FileStream(Application.persistentDataPath + "/Saves/Game_Data.xml", FileMode.Create);
         xmlSerializer.Serialize(stream, itemDB);
         stream.Close();
     }
@@ -86,10 +90,10 @@ public class DataManager : MonoBehaviour
             }
         }
 
-        if (!File.Exists(Application.dataPath + "/Saves/Game_Data.xml")) return;
+        if (!File.Exists(Application.persistentDataPath + "/Saves/Game_Data.xml")) return;
 
         XmlSerializer xmlSerializer = new XmlSerializer(typeof(ItemDB));
-        FileStream stream = new FileStream(Application.dataPath + "/Saves/Game_Data.xml", FileMode.Open);
+        FileStream stream = new FileStream(Application.persistentDataPath + "/Saves/Game_Data.xml", FileMode.Open);
         itemDB = xmlSerializer.Deserialize(stream) as ItemDB;
         stream.Close();
 
